@@ -12,7 +12,7 @@ class ViewController: UIViewController {
 
     /*  Enumeration Syntax:
      
-     NOTE: Please jump down to func viewDidLoad() function to follow along. Explanations are provided sequentially!
+     Hello there! Please jump down to func viewDidLoad() function to follow along. Explanations are provided sequentially!
      
      -you can assign "associated value of type" for your enum case. Associated values may vary depending on instance of your case (think 1:many relationship)
      --Champion.Kalista is an Int, Champion.Caitlyn is a Double, Akali is a String, and Sona is a tuple of (Int, String, String, String)
@@ -34,6 +34,9 @@ class ViewController: UIViewController {
      -tempChampion is inferred to be of type Champion so we can reassign its value without prefix
 
      -you can match functions to enums with a switch Statement.
+     
+     -to shorten enum Champion and func championPosition, you can use computed properties in enums. Please look at enum ChampionAlternative
+     
      */
     
     enum Champion{
@@ -78,7 +81,7 @@ class ViewController: UIViewController {
     func rawChampionString(for input: RawChampionString){
         switch input{
         case .Shen:
-            print(".\(input) has custom rawValue of: \"\(input.rawValue)\"")
+            print(".\(input) has explicit rawValue of: \"\(input.rawValue)\"")
         default:
             print(".\(input) has default rawValue of: \"\(input.rawValue)\"")
         }
@@ -89,10 +92,34 @@ class ViewController: UIViewController {
         case .Zac, .Jax, .Tahm_Kench, .Miss_Fortune, .Sejuani:
             print(".\(input) has default rawValue of: \(input.rawValue)")
         default:
-            print(".\(input) has non-default rawValue of: \(input.rawValue)")
+            print(".\(input) has explicit rawValue of: \(input.rawValue)")
+        }
+    }
+    
+    //Alternative to Champion + championPosition
+    enum ChampionAlternative{
+        case Akali(String)
+        case Kalista(Int), Vayne, Caitlyn(Double), Khazix, Lee_Sin, Darius
+        case Sona(Int, String, String, String)
+        case Janna
+        
+        static let allValues:[Any] = [Akali, Kalista, Vayne, Caitlyn, Khazix, Lee_Sin, Darius, Sona, Janna]
+        
+        var championPosition: String {
+            switch self{
+            case .Darius:
+                return "Top"
+            case .Akali:
+                return "Mid"
+            case .Kalista, .Vayne, .Caitlyn:
+                return "Attack Damage Carry"
+            default:
+                return "Support"
+            }
         }
         
     }
+
 
     
     override func viewDidLoad() {
@@ -129,10 +156,17 @@ class ViewController: UIViewController {
         rawChampionInt(for: .Alistar)
         rawChampionInt(for: .Vladimir)
         rawChampionInt(for: .Leona)
-        print("Getting enum with rawValue:")
-
+        
+        print("\nYou may get your enum.propertyName via rawValue like so:")
         guard let tempEnum = RawChampionInt(rawValue: 4) else {return}
         print("RawChampionInt(rawValue: 4) is \(tempEnum)")
+        
+        print("\nyou can get assign your championPosition as a computed property so that it can dynamically obtain a value like so:")
+        print("ChampionAlternative.Caitlyn(4.0).championPosition is \( ChampionAlternative.Caitlyn(4.0).championPosition)")
+        print("ChampionAlternative.Daruys.championPosition is \( ChampionAlternative.Darius.championPosition)")
+
+        
+        
         
     }
     
