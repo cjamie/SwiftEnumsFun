@@ -12,13 +12,13 @@ class ViewController: UIViewController {
 
     /*  Enumeration Syntax:
      
-     Hello there, this is a short crash course demo on enums in Swift! Please jump down to func viewDidLoad() function to follow along. Explanations are provided sequentially!
+     Hello there, this is a short crash course demo on enums (with a league of legends twist) in Swift! Please jump down to func viewDidLoad() function to follow along. Explanations are provided sequentially!
      
      -you can assign "associated value of type" for your enum case. Associated values may vary depending on instance of your case (think 1:many relationship)
      --Champion.Kalista is an Int, Champion.Caitlyn is a Double, Akali is a String, and Sona is a tuple of (Int, String, String, String)
      -multiple enum cases may appear in same line, separated by a comma
 
-     -syntax for referencing the enum.
+     -syntax for declaring and referencing an enum for different associated values
      -syntax for assigning the enumType via associated value
      
      -enums have an alternative to associated value types -> raw value types
@@ -36,9 +36,14 @@ class ViewController: UIViewController {
      -you can match functions to enums with a switch Statement. Here, we match print functions to a switch case.
      
      -to shorten enum Champion and func championPosition, you can use computed properties in enums. Please look at enum ChampionAlternative
+     --NOTE: this is more elegant coding than previous example as there is a dependency between the Champion enum and the helper function.
      -you can initialize var of enumType via rawValue. Note: raw values are not "exhaustive" so it is failable.
      
-     -TODO: recursive enumerations, networking applications, and protocols 
+     -TODO: recursive enumerations, networking applications, and protocol extensions.
+     
+     -MARK: practical application in Network service layer
+     -enums are first-class citizens in Swift so you are able to have protocol extensions.
+     
      */
     
     enum Champion{
@@ -121,18 +126,37 @@ class ViewController: UIViewController {
         }
     }
 
+    // MARK: protocol extensions + networking application and recursive enum
+    
+    
+    enum NetworkingError:Error{
+        case noResponse
+        case responseError(Int) //HTTP response codes
+        case noData
+        case couldNotParseData //fail to parse json payload
+    }
+    protocol NetworkingProtocol{
+        
+    }
+    
+    enum NetworkingService{
+        
+        
+    }
+    
 
     
+    
     override func viewDidLoad() {
-        print(Champion.Akali)
+        print(Champion.Caitlyn(3.1))
         print(Champion.Akali("someString"))
-
+        
         var tempChampion = Champion.Kalista(3)
         print(tempChampion)
-        
         tempChampion = .Sona(3, "String1", "String2", "lastStringOfTuple")
-        let tempChampion1 = Champion.Sona(4, "DifferentSona", "2", "last")
         print(tempChampion)
+
+        let tempChampion1 = Champion.Sona(4, "DifferentSona", "2", "last")
         print(tempChampion1)
 
         print("---------------------\nprintAllChampion Call:\n---------------------")
@@ -164,14 +188,13 @@ class ViewController: UIViewController {
         
         print(RawChampionInt(rawValue: 33) ?? "The Initializer failed, because no such RawChampionInt with rawValue of 33")
         
-        
         let tempChampAlt  = ChampionAlternative.Akali("anything").championPosition
         print("\nyou can get assign your championPosition as a computed property so that it can dynamically obtain a value like so:")
         print("ChampionAlternative.Caitlyn(4.0).championPosition is \( ChampionAlternative.Caitlyn(4.0).championPosition)")
         print("ChampionAlternative.Darius.championPosition is \( ChampionAlternative.Darius.championPosition)")
         print("ChampionAlternative.Akali(\"anything\").championPosition is \(tempChampAlt)")
-
+        
+        
     }
-    
 }
 
