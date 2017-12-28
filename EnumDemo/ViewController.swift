@@ -12,7 +12,7 @@ class ViewController: UIViewController {
 
     /*  Enumeration Syntax:
      
-     Hello there! Please jump down to func viewDidLoad() function to follow along. Explanations are provided sequentially!
+     Hello there, this is a short crash course demo on enums in Swift! Please jump down to func viewDidLoad() function to follow along. Explanations are provided sequentially!
      
      -you can assign "associated value of type" for your enum case. Associated values may vary depending on instance of your case (think 1:many relationship)
      --Champion.Kalista is an Int, Champion.Caitlyn is a Double, Akali is a String, and Sona is a tuple of (Int, String, String, String)
@@ -22,21 +22,23 @@ class ViewController: UIViewController {
      -syntax for assigning the enumType via associated value
      
      -enums have an alternative to associated value types -> raw value types
-     -rawChampion has raw value type of String with default(implicit) values of its property name.
-     -you can override the default raw values like so
 
-     ->>Implicitly Assigned raw values
-     -enums of a default value will default to a starting value of 0 and increment each subsequent entry
-     -NOTE: if you assign a case with an already-implicitly-assigned value, Swift will not compile
-     -enum.case should only have one raw value for every (think 1:1 relationship)
      
+     ->>Implicitly Assigned raw values
+     -enum rawChampion:String has raw value type of String with default(implicit) values of its property name.
+     -you can override the default raw values by providing explicit values
+     -enums of a default value will default to a starting value of 0 and increment each subsequent entry
+     -NOTE: if you explicitly assign a case with an already-implicitly-assigned value, Swift will not compile
+     -enum.case should only have one raw value for every (think 1:1 relationship)
      
      -tempChampion is inferred to be of type Champion so we can reassign its value without prefix
 
-     -you can match functions to enums with a switch Statement.
+     -you can match functions to enums with a switch Statement. Here, we match print functions to a switch case.
      
      -to shorten enum Champion and func championPosition, you can use computed properties in enums. Please look at enum ChampionAlternative
+     -you can initialize var of enumType via rawValue. Note: raw values are not "exhaustive" so it is failable.
      
+     -TODO: recursive enumerations, networking applications, and protocols 
      */
     
     enum Champion{
@@ -117,7 +119,6 @@ class ViewController: UIViewController {
                 return "Support"
             }
         }
-        
     }
 
 
@@ -161,13 +162,15 @@ class ViewController: UIViewController {
         guard let tempEnum = RawChampionInt(rawValue: 4) else {return}
         print("RawChampionInt(rawValue: 4) is \(tempEnum)")
         
+        print(RawChampionInt(rawValue: 33) ?? "The Initializer failed, because no such RawChampionInt with rawValue of 33")
+        
+        
+        let tempChampAlt  = ChampionAlternative.Akali("anything").championPosition
         print("\nyou can get assign your championPosition as a computed property so that it can dynamically obtain a value like so:")
         print("ChampionAlternative.Caitlyn(4.0).championPosition is \( ChampionAlternative.Caitlyn(4.0).championPosition)")
-        print("ChampionAlternative.Daruys.championPosition is \( ChampionAlternative.Darius.championPosition)")
+        print("ChampionAlternative.Darius.championPosition is \( ChampionAlternative.Darius.championPosition)")
+        print("ChampionAlternative.Akali(\"anything\").championPosition is \(tempChampAlt)")
 
-        
-        
-        
     }
     
 }
