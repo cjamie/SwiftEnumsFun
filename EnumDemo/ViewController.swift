@@ -12,8 +12,10 @@ class ViewController: UIViewController {
 
     /*  Enumeration Syntax:
      
+     NOTE: Please jump down to func viewDidLoad() function to follow along. Explanations are provided sequentially!
+     
      -you can assign "associated value of type" for your enum case.
-     --Champion.Kalista is an Int, CHampion.Caitlyn is a Double, Akali is a String, and Sona is a tuple of (Int, String, String, String)
+     --Champion.Kalista is an Int, Champion.Caitlyn is a Double, Akali is a String, and Sona is a tuple of (Int, String, String, String)
      -multiple cases can appear in same line, separated by a comma
 
      -syntax for referencing the enum.
