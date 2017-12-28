@@ -14,9 +14,9 @@ class ViewController: UIViewController {
      
      NOTE: Please jump down to func viewDidLoad() function to follow along. Explanations are provided sequentially!
      
-     -you can assign "associated value of type" for your enum case.
+     -you can assign "associated value of type" for your enum case. Associated values may vary depending on instance of your case (think 1:many relationship)
      --Champion.Kalista is an Int, Champion.Caitlyn is a Double, Akali is a String, and Sona is a tuple of (Int, String, String, String)
-     -multiple cases can appear in same line, separated by a comma
+     -multiple enum cases may appear in same line, separated by a comma
 
      -syntax for referencing the enum.
      -syntax for assigning the enumType via associated value
@@ -28,6 +28,7 @@ class ViewController: UIViewController {
      ->>Implicitly Assigned raw values
      -enums of a default value will default to a starting value of 0 and increment each subsequent entry
      -NOTE: if you assign a case with an already-implicitly-assigned value, Swift will not compile
+     -enum.case should only have one raw value for every (think 1:1 relationship)
      
      
      -tempChampion is inferred to be of type Champion so we can reassign its value without prefix
@@ -128,9 +129,11 @@ class ViewController: UIViewController {
         rawChampionInt(for: .Alistar)
         rawChampionInt(for: .Vladimir)
         rawChampionInt(for: .Leona)
+        print("Getting enum with rawValue:")
+
+        guard let tempEnum = RawChampionInt(rawValue: 4) else {return}
+        print("RawChampionInt(rawValue: 4) is \(tempEnum)")
         
-
-
     }
     
 }
