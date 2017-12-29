@@ -14,17 +14,18 @@ import Alamofire
 Enums have amazing utility for separation of concerns.
  
  
+ 
  */
 
-
 protocol NetworkProtocol {
-    func getImage(byName url:String, byType type:StructType, completion: @escaping(UIImage?, Error?) -> ())
+    func getImage(byName url:String, withType type:StructType, completion: @escaping(UIImage?, Error?) -> ())
 }
 
 enum NetworkingError:Error{
     case noResponse
     case responseError(Int) //HTTP response codes
     case noData
+    case couldNotParseData //TODO: add extra for implementation for invalid json/invalid codable struct
 }
 
 enum StructType{
@@ -33,12 +34,11 @@ enum StructType{
     case Specie(Specie)
 }
 
-
 //TODO: change Networking into an enum for .getImage, .getJson, .post examples
 class Networking: NetworkProtocol{
     
     //guard for error, response, and data
-    func getImage(byName url:String, byType type:StructType, completion: @escaping(UIImage?, Error?) -> ()){
+    func getImage(byName url:String, withType type:StructType, completion: @escaping(UIImage?, Error?) -> ()){
         var myUrl = String()
         
         switch type{
