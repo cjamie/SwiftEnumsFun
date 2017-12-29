@@ -1,0 +1,6 @@
+framework module Pods_EnumDemo {
+  umbrella header "Pods-EnumDemo-umbrella.h"
+
+  export *
+  module * { export * }
+}

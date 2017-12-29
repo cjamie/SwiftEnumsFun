@@ -126,25 +126,6 @@ class ViewController: UIViewController {
         }
     }
 
-    // MARK: protocol extensions + networking application and recursive enum
-    
-    
-    enum NetworkingError:Error{
-        case noResponse
-        case responseError(Int) //HTTP response codes
-        case noData
-        case couldNotParseData //fail to parse json payload
-    }
-    protocol NetworkingProtocol{
-        
-    }
-    
-    enum NetworkingService{
-        
-        
-    }
-    
-
     
     
     override func viewDidLoad() {
