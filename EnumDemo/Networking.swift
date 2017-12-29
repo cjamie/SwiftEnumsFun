@@ -11,7 +11,7 @@ import Alamofire
 
 // MARK: protocol extensions, enum's application in networking
 /*
-Enums have amazing utility for separation of concerns. 
+Enums have amazing utility for separation of concerns.
  
  
  */
@@ -33,7 +33,9 @@ enum StructType{
     case Specie(Specie)
 }
 
-enum Networking: NetworkProtocol{
+
+//TODO: change Networking into an enum for .getImage, .getJson, .post examples
+class Networking: NetworkProtocol{
     
     //guard for error, response, and data
     func getImage(byName url:String, byType type:StructType, completion: @escaping(UIImage?, Error?) -> ()){
